@@ -6,6 +6,7 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         button: {
             margin: theme.spacing(1),
+            width: 250
         },
     }),
 );
@@ -18,6 +19,7 @@ interface ICustomButton {
 const CustomButton = (props: ICustomButton): JSX.Element => {
     const { label, onClick } = props;
     const classes = useStyles();
+    
     return (
         <div>
             <span onClick={onClick}>

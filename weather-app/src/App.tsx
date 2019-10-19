@@ -28,7 +28,7 @@ export default class App extends React.Component<{}, IAppState> {
   private handleChange(event: React.SyntheticEvent<HTMLInputElement>): void {
     event.preventDefault();
     if(event.currentTarget.value) {
-      this.setState({cityName: event.currentTarget.value})
+      this.setState({cityName: event.currentTarget.value});
     }
   }
 

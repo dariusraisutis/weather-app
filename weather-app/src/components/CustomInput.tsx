@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme: Theme) =>
     textField: {
       marginLeft: theme.spacing(1),
       marginRight: theme.spacing(1),
-      width: 200,
+      width: 250,
     },
   }),
 );
@@ -19,9 +19,10 @@ interface ICustomInputProps {
 }
 
 const CustomInput = (props: ICustomInputProps): JSX.Element => {
-  const { id, label, onChange } = props;
+    const { id, label, onChange } = props;
     const classes = useStyles();
-    return (
+
+    return <>
         <div className={classes.textField}>
             <TextField
                 id={id}
@@ -30,7 +31,7 @@ const CustomInput = (props: ICustomInputProps): JSX.Element => {
                 onChange={onChange}
             />
         </div>
-    );
+    </>
 }
 
 export default CustomInput;

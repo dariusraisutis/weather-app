@@ -4,7 +4,7 @@ import { Card, CardContent, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles({
   card: {
-    minWidth: 275,
+    minWidth: 250,
   },
   bullet: {
     display: 'inline-block',
@@ -35,9 +35,10 @@ interface IWeatherCardProps {
 
 const WeatherCard = (props: IWeatherCardProps): JSX.Element => {
     const { temp, category, windSpeed, cityName } = props;
-    const celcius = `${temp}\xB0C`
-    const speed = `${windSpeed} m/s`
+    const celcius = `${temp}\xB0C`;
+    const speed = `${windSpeed} m/s`;
     const classes = useStyles();
+
     return <>
         <Card className={classes.card}>
           <CardContent>

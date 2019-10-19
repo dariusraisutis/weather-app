@@ -20,9 +20,9 @@ const WeatherProvider = {
                     })
                     .catch((error: Error | any) => {
                         reject(error);
-                    })
+                    });
             } else {
-                reject(">>> City name or appId was not provided!")
+                reject(">>> City name or appId was not provided!");
             }
         });
     },
