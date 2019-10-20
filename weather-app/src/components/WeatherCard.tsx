@@ -6,18 +6,6 @@ const useStyles = makeStyles({
   card: {
     minWidth: 250,
   },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-    fontWeight: 100
-  },
-  pos: {
-    marginBottom: 12,
-  },
 });
 
 interface IWeatherCardProps {
@@ -31,16 +19,17 @@ interface IWeatherCardProps {
     key: number;
     cityName?: string;
     country?: string;
+    currentTime: string;
 
 }
 
 const WeatherCard = (props: IWeatherCardProps): JSX.Element => {
-    const { temp, category, windSpeed, cityName, country } = props;
-    const celcius = `${temp}\xB0C`;
-    const speed = `${windSpeed} m/s`;
-    const classes = useStyles();
+    const { temp, category, windSpeed, cityName, country, currentTime } = props;
+    const termperature = `Temperature: ${temp}\xB0C`;
+    const speed = `Wind Speed: ${windSpeed} m/s`;
     const location = `${cityName}, ${country}`;
-
+    const classes = useStyles();
+    
     return <>
         <Card className={classes.card}>
           <CardContent>
@@ -48,16 +37,18 @@ const WeatherCard = (props: IWeatherCardProps): JSX.Element => {
               {location}
             </Typography>
             <Typography>
+              {currentTime}
+            </Typography>
+            <Typography>
               {category}
             </Typography>
             <Typography>
-            {"Temperature: "}{celcius}
+              {termperature}
             </Typography>
             <Typography>
-              {"Wind Speed: "}{speed}
+              {speed}
             </Typography>
           </CardContent>
-          
         </Card>
     </>
 }

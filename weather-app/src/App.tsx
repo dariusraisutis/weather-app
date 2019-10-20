@@ -47,7 +47,7 @@ export default class App extends React.Component<{}, IAppState> {
     return (
       <div className={"App"}>
         <CustomHeader text={"Weather App"}/>
-        <CustomInput onChange={this.handleChange} label={"City Name"} id={""}/>
+        <CustomInput onChange={this.handleChange} label={"City Name"} id={""} error={false}/>
         <CustomButton onClick={this.handleButtonClick} label={"Get Weather"}/>
         <div>
           {
@@ -60,6 +60,7 @@ export default class App extends React.Component<{}, IAppState> {
                   averageTemperature={current.averageTemperature}
                   cityName={current.cityName}
                   country={current.country}
+                  currentTime={current.currentTime}
                   key={key}
                 />
               })

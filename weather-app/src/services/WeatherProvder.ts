@@ -8,6 +8,19 @@ export type Weather = {
     weekDay?: string;
     cityName: string;
     country: string;
+    currentTime: string;
+}
+
+const DateParser = (datetimeMilis: number, timeZoneOffSet: number): string => {
+    if(!datetimeMilis || !timeZoneOffSet) {
+        return "";
+    }
+
+    let date = new Date(datetimeMilis * 1000 + timeZoneOffSet * 1000).toUTCString().replace("GMT", "")
+    let dateArray = date.split(":");
+    date = `${dateArray[0]}:${dateArray[1]}`;
+
+    return date;
 }
 
 const WeatherProvider = {
@@ -35,7 +48,8 @@ const WeatherProvider = {
                 currentTemperature: weatherData.main.temp,
                 windSpeed: weatherData.wind.speed,
                 cityName: weatherData.name,
-                country: weatherData.sys.country
+                country: weatherData.sys.country,
+                currentTime: DateParser(weatherData.dt, weatherData.timezone)
             };
             weather.push(currentweatherData);
         }

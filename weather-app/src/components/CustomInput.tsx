@@ -15,11 +15,12 @@ const useStyles = makeStyles((theme: Theme) =>
 interface ICustomInputProps {
   id: string;
   label: string;
+  error: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const CustomInput = (props: ICustomInputProps): JSX.Element => {
-    const { id, label, onChange } = props;
+    const { id, label, onChange, error } = props;
     const classes = useStyles();
 
     return <>
@@ -29,6 +30,7 @@ const CustomInput = (props: ICustomInputProps): JSX.Element => {
                 label={label}
                 margin={"normal"}
                 onChange={onChange}
+                error={error}
             />
         </div>
     </>
