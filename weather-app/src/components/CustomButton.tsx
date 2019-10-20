@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         button: {
             margin: theme.spacing(1),
-            width: 250
+            width: 150
         },
     }),
 );

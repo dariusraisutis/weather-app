@@ -7,6 +7,7 @@ export type Weather = {
     windSpeed: number;
     weekDay?: string;
     cityName: string;
+    country: string;
 }
 
 const WeatherProvider = {
@@ -33,7 +34,8 @@ const WeatherProvider = {
                 category: weatherData.weather[0].description,
                 currentTemperature: weatherData.main.temp,
                 windSpeed: weatherData.wind.speed,
-                cityName: weatherData.name
+                cityName: weatherData.name,
+                country: weatherData.sys.country
             };
             weather.push(currentweatherData);
         }

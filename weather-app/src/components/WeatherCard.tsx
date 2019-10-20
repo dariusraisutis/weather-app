@@ -30,20 +30,22 @@ interface IWeatherCardProps {
     weekDay?: string
     key: number;
     cityName?: string;
+    country?: string;
 
 }
 
 const WeatherCard = (props: IWeatherCardProps): JSX.Element => {
-    const { temp, category, windSpeed, cityName } = props;
+    const { temp, category, windSpeed, cityName, country } = props;
     const celcius = `${temp}\xB0C`;
     const speed = `${windSpeed} m/s`;
     const classes = useStyles();
+    const location = `${cityName}, ${country}`;
 
     return <>
         <Card className={classes.card}>
           <CardContent>
-            <Typography className={classes.title} variant={"h5"} color="textSecondary" gutterBottom>
-              {cityName}
+            <Typography variant={"h5"} color="textSecondary" gutterBottom>
+              {location}
             </Typography>
             <Typography>
               {category}

@@ -59,6 +59,7 @@ export default class App extends React.Component<{}, IAppState> {
                   windSpeed={current.windSpeed}
                   averageTemperature={current.averageTemperature}
                   cityName={current.cityName}
+                  country={current.country}
                   key={key}
                 />
               })
