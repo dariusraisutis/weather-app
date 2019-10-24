@@ -19,8 +19,7 @@ interface ICustomInputProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const CustomInput = (props: ICustomInputProps): JSX.Element => {
-    const { id, label, onChange, error } = props;
+const CustomInput = ({ id, label, onChange, error }: ICustomInputProps): JSX.Element => {
     const classes = useStyles();
 
     return <>

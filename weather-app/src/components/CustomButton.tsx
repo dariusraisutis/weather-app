@@ -16,8 +16,7 @@ interface ICustomButton {
     onClick: (event: React.MouseEvent<HTMLSpanElement>) => void;
 }
 
-const CustomButton = (props: ICustomButton): JSX.Element => {
-    const { label, onClick } = props;
+const CustomButton = ({ label, onClick }: ICustomButton): JSX.Element => {
     const classes = useStyles();
     
     return (

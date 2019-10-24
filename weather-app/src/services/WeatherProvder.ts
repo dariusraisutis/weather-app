@@ -11,12 +11,12 @@ export type Weather = {
     currentTime: string;
 }
 
-const DateParser = (datetimeMilis: number, timeZoneOffSet: number): string => {
-    if(!datetimeMilis || !timeZoneOffSet) {
+const DateParser = (dateTimeInSeconds: number, timeZoneOffSet: number): string => {
+    if(!dateTimeInSeconds || !timeZoneOffSet) {
         return "";
     }
 
-    let date = new Date(datetimeMilis * 1000 + timeZoneOffSet * 1000).toUTCString().replace("GMT", "")
+    let date = new Date(dateTimeInSeconds * 1000 + timeZoneOffSet * 1000).toUTCString().replace("GMT", "")
     let dateArray = date.split(":");
     date = `${dateArray[0]}:${dateArray[1]}`;
 

@@ -23,8 +23,7 @@ interface IWeatherCardProps {
 
 }
 
-const WeatherCard = (props: IWeatherCardProps): JSX.Element => {
-    const { temp, category, windSpeed, cityName, country, currentTime } = props;
+const WeatherCard = ({ temp, category, windSpeed, cityName, country, currentTime }: IWeatherCardProps): JSX.Element => {
     const termperature = `Temperature: ${temp}\xB0C`;
     const speed = `Wind Speed: ${windSpeed} m/s`;
     const location = `${cityName}, ${country}`;

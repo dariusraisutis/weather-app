@@ -17,8 +17,7 @@ interface ICustomerHeaderProps {
     text: string;
 }
 
-const CustomHeader = (props: ICustomerHeaderProps): JSX.Element => {
-    const { text } = props;
+const CustomHeader = ({ text }: ICustomerHeaderProps): JSX.Element => {
     const classes = useStyles();
 
     return <>
