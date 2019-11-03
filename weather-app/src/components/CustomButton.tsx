@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         button: {
             margin: theme.spacing(1),
-            width: 150
+            width: 50
         },
     }),
 );
@@ -20,7 +20,6 @@ const CustomButton = ({ label, onClick }: ICustomButton): JSX.Element => {
     const classes = useStyles();
     
     return (
-        <div>
             <span onClick={onClick}>
                 <Button
                     variant="contained"
@@ -30,7 +29,6 @@ const CustomButton = ({ label, onClick }: ICustomButton): JSX.Element => {
                     {label}
                 </Button>
             </span>
-        </div>
     );
 }
 

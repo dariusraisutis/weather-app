@@ -3,6 +3,7 @@ export interface IConfig {
     cityNamePlaceHolder: string;
     forecastByCityUrl: string;
     appIdPlaceHolder: string;
+    foreCastFiveDays: string;
 }
 
 let config: IConfig = require('./config.json');

@@ -9,17 +9,16 @@ const useStyles = makeStyles({
 });
 
 interface IWeatherCardProps {
-    temp: number;
+    temp?: number;
     maxTemp?: number;
     minTemp?: number;
     category?: string;
-    averageTemperature?: number;
     windSpeed?: number;
     weekDay?: string
-    key: number;
+    key?: number;
     cityName?: string;
     country?: string;
-    currentTime: string;
+    currentTime?: string;
 
 }
 
