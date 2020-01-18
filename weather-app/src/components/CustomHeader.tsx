@@ -7,8 +7,7 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
             padding: theme.spacing(3, 2),
-            width: 250,
-            textAlign: "center"
+            textAlign: "left"
         },
     }),
 );

@@ -1,13 +1,9 @@
 import React from 'react';
 import './App.css';
-import WeatherCard from "./components/WeatherCard";
 import WeatherProvider, { Weather, ForecastData } from "./services/WeatherProvder";
 import config from './config';
-import CustomInput from './components/CustomInput';
-import CustomButton from './components/CustomButton';
-import CustomHeader from "./components/CustomHeader";
-import CustomContainer from "./components/CustomContainer";
-import CustomGraph from "./components/CustomGraph";
+import AppContainer from './components/AppContainer';
+
 
 interface IAppState {
   weatherResult: Weather[];
@@ -57,31 +53,12 @@ export default class App extends React.Component<{}, IAppState> {
 
   public render(): React.ReactElement<{}> {
     return (
-      <div className={"App"}>
-
-        <CustomContainer/>
-        <CustomHeader text={"Weather App"} />
-        <CustomInput onChange={this.handleChange} label={"City Name"} id={""} error={false} />
-        <CustomButton onClick={this.handleButtonClick} label={"Go"} />
-        <div>
-          {
-            this.state.weatherResult ?
-              this.state.weatherResult.map((current, key) => {
-                return <WeatherCard
-                  temp={current.currentTemperature}
-                  category={current.category}
-                  windSpeed={current.windSpeed}
-                  cityName={current.cityName}
-                  country={current.country}
-                  currentTime={current.currentTime}
-                  key={key}
-                />
-              })
-              : null
-          }
-          { this.state.forecast.length ? <CustomGraph data={this.state.forecast} /> : null }
-        </div>
-      </div>
+    <AppContainer
+      weatherResult={this.state.weatherResult} 
+      forecast={this.state.forecast} 
+      onChange={this.handleChange}
+      onClick={this.handleButtonClick}
+    />
     );
   }
 }

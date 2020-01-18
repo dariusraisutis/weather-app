@@ -59,7 +59,7 @@ const WeatherProvider = {
             return forecast;
         }
 
-        let forecastData = weatherData.list.splice(0, 7);
+        let forecastData = weatherData.list.splice(0, 6);
         forecastData.map((current: any) => {
             let forecastByHour: ForecastData = {
                 temp: current.main.temp,
