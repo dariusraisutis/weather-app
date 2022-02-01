@@ -18,7 +18,6 @@ interface ICustomButton {
 
 const CustomButton = ({ label, onClick }: ICustomButton): JSX.Element => {
     const classes = useStyles();
-    
     return (
             <span onClick={onClick}>
                 <Button

@@ -6,18 +6,17 @@ import AppContainer from './components/AppContainer';
 
 
 interface IAppState {
-  weatherResult: Weather[];
+  weather: Weather;
   forecast: ForecastData[];
   cityName: string;
 }
-
 
 export default class App extends React.Component<{}, IAppState> {
 
   public constructor(props: any) {
     super(props);
     this.state = {
-      weatherResult: [],
+      weather: props.weather,
       forecast: [],
       cityName: "",
     };
@@ -36,7 +35,7 @@ export default class App extends React.Component<{}, IAppState> {
     event.preventDefault();
     WeatherProvider.getForcast(this.state.cityName, config.appId, config.forecastByCityUrl)
       .then((result) => {
-        this.setState({ weatherResult: WeatherProvider.weatherParser(result) });
+        this.setState({ weather: WeatherProvider.weatherParser(result) });
       })
       .catch((error: Error | any) => {
         console.log(error);
@@ -54,7 +53,7 @@ export default class App extends React.Component<{}, IAppState> {
   public render(): React.ReactElement<{}> {
     return (
     <AppContainer
-      weatherResult={this.state.weatherResult} 
+      weatherResult={this.state.weather} 
       forecast={this.state.forecast} 
       onChange={this.handleChange}
       onClick={this.handleButtonClick}

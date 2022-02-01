@@ -33,24 +33,19 @@ const WeatherProvider = {
             }
         });
     },
-    weatherParser: (weatherData: any): Weather[] => {
-        let weather: Weather[] = [];
+    weatherParser: (weatherDataProp: any): Weather => {
+        if(!weatherDataProp) throw new Error();
 
-        if(!weather){
-            return weather;
-        }
-
-        let currentweatherData: Weather = {
-            category: weatherData.weather[0].description,
-            currentTemperature: weatherData.main.temp,
-            windSpeed: weatherData.wind.speed,
-            cityName: weatherData.name,
-            country: weatherData.sys.country,
-            currentTime: Utils.weatherDateParser(weatherData.dt, weatherData.timezone)
+        let weatherData: Weather = {
+            category: weatherDataProp.weather[0].description,
+            currentTemperature: weatherDataProp.main.temp,
+            windSpeed: weatherDataProp.wind.speed,
+            cityName: weatherDataProp.name,
+            country: weatherDataProp.sys.country,
+            currentTime: Utils.weatherDateParser(weatherDataProp.dt, weatherDataProp.timezone)
         };
-        weather.push(currentweatherData);
         
-        return weather;
+        return weatherData;
     },
     forecastParser: (weatherData: any): ForecastData[] => {
         let forecast: ForecastData[] = [];

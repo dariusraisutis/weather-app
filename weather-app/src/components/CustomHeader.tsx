@@ -18,7 +18,6 @@ interface ICustomerHeaderProps {
 
 const CustomHeader = ({ text }: ICustomerHeaderProps): JSX.Element => {
     const classes = useStyles();
-
     return <>
         <Paper className={classes.root}>
             <Typography variant="h5" component="h3">

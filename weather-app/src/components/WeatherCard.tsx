@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardContent, Typography } from "@material-ui/core";
+import { Weather } from "../services/WeatherProvder";
 
 const useStyles = makeStyles({
   card: {
@@ -9,25 +10,15 @@ const useStyles = makeStyles({
 });
 
 interface IWeatherCardProps {
-    temp?: number;
-    maxTemp?: number;
-    minTemp?: number;
-    category?: string;
-    windSpeed?: number;
-    weekDay?: string
-    key?: number;
-    cityName?: string;
-    country?: string;
-    currentTime?: string;
-
+    weather: Weather;
 }
 
-const WeatherCard = ({ temp, category, windSpeed, cityName, country, currentTime }: IWeatherCardProps): JSX.Element => {
-    const termperature = `Temperature: ${temp}\xB0C`;
+const WeatherCard = ({ weather }: IWeatherCardProps): JSX.Element => {
+    const { currentTemperature, category, windSpeed, cityName, country, currentTime } = weather;
+    const termperature = `Temperature: ${currentTemperature}\xB0C`;
     const speed = `Wind Speed: ${windSpeed} m/s`;
     const location = `${cityName}, ${country}`;
     const classes = useStyles();
-    
     return <>
         <Card className={classes.card}>
           <CardContent>

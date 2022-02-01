@@ -21,7 +21,6 @@ interface ICustomInputProps {
 
 const CustomInput = ({ id, label, onChange, error }: ICustomInputProps): JSX.Element => {
     const classes = useStyles();
-
     return <>
         <div className={classes.textField}>
             <TextField
