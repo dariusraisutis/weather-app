@@ -1,7 +1,7 @@
 {
     "appId": "fb8dd9394790d21265b581f35019b65a",
-    "forecastByCityUrl": "https://api.openweathermap.org/data/2.5/weather?q={cityName}&units=metric&APPID={appId}",
-    "foreCastFiveDays": "https://api.openweathermap.org/data/2.5/forecast?q={cityName}&units=metric&APPID={appId}",
+    "forecastByCityUrl": "https://api.openweathermap.org/data/2.5/weather?q={cityName}&units=metric&APPID=fb8dd9394790d21265b581f35019b65a",
+    "forecastFiveDaysUrl": "https://api.openweathermap.org/data/2.5/forecast?q={cityName}&units=metric&APPID=fb8dd9394790d21265b581f35019b65a",
     "cityNamePlaceHolder": "{cityName}",
     "appIdPlaceHolder": "{appId}"
 }

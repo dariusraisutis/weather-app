@@ -1,3 +1,4 @@
+import config from "../config";
 
 const Utils =  {
    
@@ -24,6 +25,10 @@ const Utils =  {
         date = new Date(dateTimeSeconds * 1000 + timzeZoneOffSet * 1000).getUTCHours().toString();
     
         return `${date}:00`;
+    },
+    constructRequestUrl: (url: string, cityName: string): string => {
+        return url
+            .replace(config.cityNamePlaceHolder, cityName);
     }
 }
 

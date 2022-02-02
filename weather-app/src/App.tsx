@@ -1,9 +1,7 @@
 import React from 'react';
 import './App.css';
 import WeatherProvider, { Weather, ForecastData } from "./services/WeatherProvder";
-import config from './config';
 import AppContainer from './components/AppContainer';
-
 
 interface IAppState {
   weather: Weather;
@@ -31,23 +29,18 @@ export default class App extends React.Component<{}, IAppState> {
     }
   }
 
-  private handleButtonClick(event: React.SyntheticEvent<HTMLSpanElement>): void {
+  private async handleButtonClick(event: React.SyntheticEvent<HTMLSpanElement>) {
     event.preventDefault();
-    WeatherProvider.getForcast(this.state.cityName, config.appId, config.forecastByCityUrl)
-      .then((result) => {
-        this.setState({ weather: WeatherProvider.weatherParser(result) });
-      })
-      .catch((error: Error | any) => {
-        console.log(error);
+    try {
+      let weatheResult = await WeatherProvider.getCurrentWeather(this.state.cityName);
+      let forecastResult = await WeatherProvider.getCurrentWeatherForecast(this.state.cityName);
+      this.setState({ 
+        weather: WeatherProvider.weatherParser(weatheResult),
+        forecast: WeatherProvider.forecastParser(forecastResult)
       });
-
-    WeatherProvider.getForcast(this.state.cityName, config.appId, config.foreCastFiveDays)
-      .then((result) => {
-        this.setState({ forecast: WeatherProvider.forecastParser(result) });
-      })
-      .catch((error: Error | any) => {
-        console.log(error);
-      });
+    } catch (error) {
+        throw new Error(error);
+    }
   }
 
   public render(): React.ReactElement<{}> {

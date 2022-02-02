@@ -17,26 +17,16 @@ export type ForecastData = {
 }
 
 const WeatherProvider = {
-    getForcast: (cityName: string, appId: string, requestUrl: string): Promise<any> => {
-        return new Promise<any>((resolve, reject) => {
-            if (!cityName || !appId || !requestUrl) {
-                reject(">>> City name, appId or request url was not provided!");
-            } else {
-                let url = requestUrl.replace(config.cityNamePlaceHolder, cityName).replace(config.appIdPlaceHolder, appId);
-                fetch(url)
-                    .then((result: Response) => {
-                        resolve(result.json());
-                    })
-                    .catch((error: Error | any) => {
-                        reject(error);
-                    });
-            }
-        });
+    getCurrentWeather: async (cityName: string): Promise<any> => {
+        return await WeatherProvider
+            .fetchData(Utils.constructRequestUrl(config.forecastByCityUrl, cityName));    
+    },
+    getCurrentWeatherForecast: async (cityName: string): Promise<any> => {
+        return await WeatherProvider
+            .fetchData(Utils.constructRequestUrl(config.forecastFiveDaysUrl, cityName));
     },
     weatherParser: (weatherDataProp: any): Weather => {
-        if(!weatherDataProp) throw new Error();
-
-        let weatherData: Weather = {
+        return {
             category: weatherDataProp.weather[0].description,
             currentTemperature: weatherDataProp.main.temp,
             windSpeed: weatherDataProp.wind.speed,
@@ -44,26 +34,26 @@ const WeatherProvider = {
             country: weatherDataProp.sys.country,
             currentTime: Utils.weatherDateParser(weatherDataProp.dt, weatherDataProp.timezone)
         };
-        
-        return weatherData;
     },
     forecastParser: (weatherData: any): ForecastData[] => {
-        let forecast: ForecastData[] = [];
-
-        if (!weatherData) {
-            return forecast;
-        }
-
         let forecastData = weatherData.list.splice(0, 6);
-        forecastData.map((current: any) => {
-            let forecastByHour: ForecastData = {
-                temp: current.main.temp,
-                time: Utils.forecastDateParser(current.dt, weatherData.city.timezone)
+         return forecastData.map((dataItem: any) => {
+            return {
+                temp: dataItem.main.temp,
+                time: Utils.forecastDateParser(dataItem.dt, weatherData.city.timezone)
             };
-            forecast.push(forecastByHour);
         });
-        
-        return forecast;
+    },
+    fetchData: async (url: string): Promise<any> => {
+        try {
+            let data = await fetch(url);
+            if (!data) throw new Error("Did not receive any data.");
+
+            return data.json();         
+        }
+        catch (error) {
+            throw new Error(error);
+        }
     }
 }
 
