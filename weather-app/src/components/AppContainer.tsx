@@ -10,16 +10,17 @@ import CustomGraph from "./CustomGraph";
 interface IAppContainerProps {
     weatherResult: Weather;
     forecast: ForecastData[];
+    isButtonDisabled: boolean;
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     onClick: (event: React.MouseEvent<HTMLSpanElement>) => void;
 }
-const AppContainer = ({ weatherResult, forecast, onChange, onClick }: IAppContainerProps): JSX.Element => {
+const AppContainer = ({ weatherResult, forecast, isButtonDisabled, onChange, onClick }: IAppContainerProps): JSX.Element => {
     return <>
         <CssBaseline />
         <Container maxWidth={"xs"} fixed={true}>
             <CustomHeader text={"Weather App"} />
             <CustomInput onChange={onChange} label={"City Name"} id={""} error={false} />
-            <CustomButton onClick={onClick} label={"Click Me"} />
+            <CustomButton onClick={onClick} label={"Click Me"} isDisabled={isButtonDisabled} />
             {
                 weatherResult
                     ? <WeatherCard weather={weatherResult} />

@@ -24,16 +24,20 @@ export default class App extends React.Component<{}, IAppState> {
 
   private handleChange(event: React.SyntheticEvent<HTMLInputElement>): void {
     event.preventDefault();
-    if (event.currentTarget.value) {
-      this.setState({ cityName: event.currentTarget.value });
+    const { currentTarget: { value } } = event;
+    if (!value){
+      this.setState({ cityName : ""})
+    } else {
+      this.setState({ cityName: value });
     }
   }
 
-  private async handleButtonClick(event: React.SyntheticEvent<HTMLSpanElement>) {
+  private async handleButtonClick(event: React.SyntheticEvent<HTMLSpanElement>): Promise<void> {
     event.preventDefault();
     try {
-      let weatheResult = await WeatherProvider.getCurrentWeather(this.state.cityName);
-      let forecastResult = await WeatherProvider.getCurrentWeatherForecast(this.state.cityName);
+      const { cityName } = this.state;
+      let weatheResult = await WeatherProvider.getCurrentWeather(cityName);
+      let forecastResult = await WeatherProvider.getCurrentWeatherForecast(cityName);
       this.setState({ 
         weather: WeatherProvider.weatherParser(weatheResult),
         forecast: WeatherProvider.forecastParser(forecastResult)
@@ -44,10 +48,12 @@ export default class App extends React.Component<{}, IAppState> {
   }
 
   public render(): React.ReactElement<{}> {
+    console.log(this.state)
     return (
     <AppContainer
       weatherResult={this.state.weather} 
       forecast={this.state.forecast} 
+      isButtonDisabled={!this.state.cityName}
       onChange={this.handleChange}
       onClick={this.handleButtonClick}
     />

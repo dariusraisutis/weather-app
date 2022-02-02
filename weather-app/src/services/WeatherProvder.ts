@@ -25,33 +25,36 @@ const WeatherProvider = {
         return await WeatherProvider
             .fetchData(Utils.constructRequestUrl(config.forecastFiveDaysUrl, cityName));
     },
-    weatherParser: (weatherDataProp: any): Weather => {
+    weatherParser: ({ weather, main: { temp }, wind: { speed }, name, sys: { country }, dt, timezone }: any): Weather => {
+        const { description } = weather[0];
         return {
-            category: weatherDataProp.weather[0].description,
-            currentTemperature: weatherDataProp.main.temp,
-            windSpeed: weatherDataProp.wind.speed,
-            cityName: weatherDataProp.name,
-            country: weatherDataProp.sys.country,
-            currentTime: Utils.weatherDateParser(weatherDataProp.dt, weatherDataProp.timezone)
+            category: description,
+            currentTemperature: temp,
+            windSpeed: speed,
+            cityName: name,
+            country: country,
+            currentTime: Utils.weatherDateParser(dt, timezone)
         };
     },
-    forecastParser: (weatherData: any): ForecastData[] => {
-        let forecastData = weatherData.list.splice(0, 6);
-         return forecastData.map((dataItem: any) => {
+    forecastParser: ({ list, city: { timezone } }: any): ForecastData[] => {
+        let forecastData = list.splice(0, 6);
+        return forecastData.map(({ main: { temp }, dt }: any) => {
             return {
-                temp: dataItem.main.temp,
-                time: Utils.forecastDateParser(dataItem.dt, weatherData.city.timezone)
+                temp: temp,
+                time: Utils.forecastDateParser(dt, timezone)
             };
         });
     },
     fetchData: async (url: string): Promise<any> => {
         try {
             let data = await fetch(url);
-            if (!data) throw new Error("Did not receive any data.");
 
-            return data.json();         
-        }
-        catch (error) {
+            if (!data || data.status === 404) {
+                throw new Error("Did not find any data.");
+            } else if (data.status === 200){
+                return data.json();
+            }      
+        } catch (error) {
             throw new Error(error);
         }
     }

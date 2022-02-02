@@ -13,10 +13,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface ICustomButton {
     label: string;
+    isDisabled: boolean;
     onClick: (event: React.MouseEvent<HTMLSpanElement>) => void;
 }
 
-const CustomButton = ({ label, onClick }: ICustomButton): JSX.Element => {
+const CustomButton = ({ label, isDisabled, onClick }: ICustomButton): JSX.Element => {
     const classes = useStyles();
     return (
             <span onClick={onClick}>
@@ -25,6 +26,7 @@ const CustomButton = ({ label, onClick }: ICustomButton): JSX.Element => {
                     color="primary"
                     className={classes.button}
                     size={"medium"}
+                    disabled={isDisabled}
                 >
                     {label}
                 </Button>
