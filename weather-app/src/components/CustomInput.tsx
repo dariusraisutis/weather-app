@@ -16,10 +16,11 @@ interface ICustomInputProps {
   id: string;
   label: string;
   error: boolean;
+  errorMessage: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const CustomInput = ({ id, label, onChange, error }: ICustomInputProps): JSX.Element => {
+const CustomInput = ({ id, label, onChange, error, errorMessage }: ICustomInputProps): JSX.Element => {
     const classes = useStyles();
     return <>
         <div className={classes.textField}>
@@ -29,6 +30,7 @@ const CustomInput = ({ id, label, onChange, error }: ICustomInputProps): JSX.Ele
                 margin={"normal"}
                 onChange={onChange}
                 error={error}
+                helperText={errorMessage}
             />
         </div>
     </>
