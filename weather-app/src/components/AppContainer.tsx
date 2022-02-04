@@ -11,21 +11,29 @@ interface IAppContainerProps {
     weather?: Weather;
     forecast: ForecastData[];
     isButtonDisabled: boolean;
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    onClick: (event: React.MouseEvent<HTMLSpanElement>) => void;
     error: boolean;
     errorMessage: string;
+    onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onButtonClick: (event: React.MouseEvent<HTMLSpanElement>) => void;
 }
-const AppContainer = ({ weather: weatherResult, forecast, isButtonDisabled, error, errorMessage, onChange, onClick }: IAppContainerProps): JSX.Element => {
+const AppContainer = ({ 
+        weather, 
+        forecast, 
+        isButtonDisabled, 
+        error, 
+        errorMessage, 
+        onInputChange, 
+        onButtonClick
+     }: IAppContainerProps): JSX.Element => {
     return <>
         <CssBaseline />
         <Container maxWidth={"xs"} fixed={true}>
             <CustomHeader text={"Weather App"} />
-            <CustomInput onChange={onChange} label={"City Name"} id={""} error={error} errorMessage={errorMessage} />
-            <CustomButton onClick={onClick} label={"Click Me"} isDisabled={isButtonDisabled} />
+            <CustomInput onChange={onInputChange} label={"City Name"} id={""} error={error} errorMessage={errorMessage} />
+            <CustomButton onClick={onButtonClick} label={"Click Me"} isDisabled={isButtonDisabled} />
             {
-                weatherResult
-                    ? <WeatherCard weather={weatherResult} />
+                weather
+                    ? <WeatherCard weather={weather} />
                     : null
             }
             { 

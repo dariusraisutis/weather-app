@@ -32,11 +32,8 @@ export default class App extends React.Component<{}, IAppState> {
     if (error){
       this.setState({ error: false, errorMessage: "" });
     } 
-    if (!value){
-        this.setState({ cityName : ""});
-    } else {
-        this.setState({ cityName: value });
-    }
+
+    this.setState({ cityName: value });
   }
 
   private async handleButtonClick(event: React.SyntheticEvent<HTMLSpanElement>): Promise<void> {
@@ -61,8 +58,8 @@ export default class App extends React.Component<{}, IAppState> {
       weather={weather} 
       forecast={forecast} 
       isButtonDisabled={!cityName || error}
-      onChange={this.handleInputChange}
-      onClick={this.handleButtonClick}
+      onInputChange={this.handleInputChange}
+      onButtonClick={this.handleButtonClick}
       error={error}
       errorMessage={errorMessage}
     />

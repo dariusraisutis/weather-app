@@ -20,17 +20,16 @@ interface ICustomButton {
 const CustomButton = ({ label, isDisabled, onClick }: ICustomButton): JSX.Element => {
     const classes = useStyles();
     return (
-            <span onClick={onClick}>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    className={classes.button}
-                    size={"medium"}
-                    disabled={isDisabled}
-                >
-                    {label}
-                </Button>
-            </span>
+            <Button
+                variant="contained"
+                color="primary"
+                className={classes.button}
+                size={"medium"}
+                disabled={isDisabled}
+                onClick={onClick}
+            >
+                {label}
+            </Button>
     );
 }
 
