@@ -51,8 +51,14 @@ const WeatherProvider = {
 
             if (!data || data.status === 404) {
                 throw new Error("Did not find any data.");
+            } else if (data.status === 401){
+                throw new Error("Not authorized. Please check API key.")
+            } else if (data.status === 400){
+                throw new Error ("Request is not valid.");
             } else if (data.status === 200){
                 return data.json();
+            } else {
+                throw new Error("Unexpected exception.");
             }      
         } catch (error) {
             throw new Error(error);
