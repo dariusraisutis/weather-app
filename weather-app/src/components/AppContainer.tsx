@@ -14,7 +14,7 @@ interface IAppContainerProps {
     error: boolean;
     errorMessage: string;
     onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    onButtonClick: (event: React.MouseEvent<HTMLSpanElement>) => void;
+    onButtonClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 const AppContainer = ({ 
         weather, 

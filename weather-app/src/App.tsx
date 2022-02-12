@@ -36,7 +36,7 @@ export default class App extends React.Component<{}, IAppState> {
     this.setState({ cityName: value });
   }
 
-  private async handleButtonClick(event: React.SyntheticEvent<HTMLSpanElement>): Promise<void> {
+  private async handleButtonClick(event: React.SyntheticEvent<HTMLButtonElement>): Promise<void> {
     event.preventDefault();
     try {
       const { cityName } = this.state;
