@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme: Theme) => {
     })
 });
 
-const CustomGrid = () => {
+const CustomGrid = (): JSX.Element => {
     const classes = useStyles();
     return <>
         <Grid container spacing={2}>

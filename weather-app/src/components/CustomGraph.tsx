@@ -9,7 +9,7 @@ interface ICustomGraphProps {
     data: ForecastData[];
 }
 
-const CustomGraph = (props: ICustomGraphProps) => {
+const CustomGraph = (props: ICustomGraphProps): JSX.Element => {
   // TODO: replace graph as this does not satisfy
     return <>
         <AreaChart

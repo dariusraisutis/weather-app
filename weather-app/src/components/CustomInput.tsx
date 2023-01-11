@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import TextField from "@material-ui/core/TextField";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
@@ -33,7 +33,7 @@ const CustomInput = ({ id, label, onChange, error, errorMessage }: ICustomInputP
                 helperText={errorMessage}
             />
         </div>
-    </>
+    </>;
 }
 
 export default CustomInput;

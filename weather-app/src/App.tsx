@@ -1,68 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import WeatherProvider, { Weather, ForecastData } from "./services/WeatherProvder";
+import WeatherProvider, { ForecastData, Weather } from "./services/WeatherProvder";
 import AppContainer from './components/AppContainer';
 
-interface IAppState {
-  weather?: Weather;
-  forecast: ForecastData[];
-  cityName: string;
-  error: boolean;
-  errorMessage: string;
-}
+const App = (): JSX.Element => {
+  const [weather, setWeather] = useState<Weather | undefined>(undefined);
+  const [forecast, setForecast] = useState<ForecastData[] | []>([]);
+  const [cityName, setCityName] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [error, setError] = useState(false);
 
-export default class App extends React.Component<{}, IAppState> {
-  public constructor(props: any) {
-    super(props);
-    this.state = {
-      weather: undefined,
-      forecast: [],
-      cityName: "",
-      error: false,
-      errorMessage: ""
-    };
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleButtonClick = this.handleButtonClick.bind(this);
-  }
-
-  private handleInputChange(event: React.SyntheticEvent<HTMLInputElement>): void {
+  const handleInputChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
     event.preventDefault();
     const { currentTarget: { value } } = event;
-    const { error } = this.state;
+
     if (error){
-      this.setState({ error: false, errorMessage: "" });
+      setError(false);
+      setErrorMessage('');
     } 
 
-    this.setState({ cityName: value });
+    setCityName(value);
   }
 
-  private async handleButtonClick(event: React.SyntheticEvent<HTMLButtonElement>): Promise<void> {
+  const handleButtonClick = async (event: React.SyntheticEvent<HTMLButtonElement>): Promise<void> => {
     event.preventDefault();
     try {
-      const { cityName } = this.state;
       let weatherResult = await WeatherProvider.getCurrentWeather(cityName);
       let forecastResult = await WeatherProvider.getCurrentWeatherForecast(cityName);
-      this.setState({ 
-        weather: WeatherProvider.weatherParser(weatherResult),
-        forecast: WeatherProvider.forecastParser(forecastResult)
-      });
+      setWeather(WeatherProvider.weatherParser(weatherResult));
+      setForecast(WeatherProvider.forecastParser(forecastResult));
     } catch (error) {
-        this.setState({ error: true, errorMessage: error.message, weather: undefined, forecast: [] });
+        setError(true);
+        setErrorMessage(error instanceof Error ? error.message : String(error));
+        setWeather(undefined);
+        setForecast([]);
     }
   }
 
-  public render(): React.ReactElement<{}> {
-    const { weather, forecast, cityName, error, errorMessage } = this.state;
-    return (
-    <AppContainer
-      weather={weather} 
-      forecast={forecast} 
-      isButtonDisabled={!cityName || error}
-      onInputChange={this.handleInputChange}
-      onButtonClick={this.handleButtonClick}
-      error={error}
-      errorMessage={errorMessage}
-    />
-    );
-  }
+  return (
+    <>
+      <AppContainer
+        weather={weather}
+        forecast={forecast} 
+        isButtonDisabled={!cityName || error}
+        onInputChange={handleInputChange}
+        onButtonClick={handleButtonClick}
+        error={error}
+        errorMessage={errorMessage} />
+    </>
+  )
 }
+
+export default App;
