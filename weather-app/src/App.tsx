@@ -14,7 +14,9 @@ const App = (): JSX.Element => {
     event.preventDefault();
     const { currentTarget: { value } } = event;
 
-    if (error){
+    // When input has an error and change is made then remove error and error message from the input
+    // Display error only on submit
+    if (error) {
       setError(false);
       setErrorMessage('');
     } 
